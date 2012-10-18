@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
 	
-	final static String TEXT_DIR = "/home/reto/workspace/scs/texts-en";
+	final static String TEXT_DIR = "texts-en";
 	
 	public static void main(String... args) throws Exception {
 		TextCollection tc = new TextCollection(new File(TEXT_DIR));
