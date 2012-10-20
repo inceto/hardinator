@@ -11,6 +11,14 @@ package ch.unibe.scs.into;
  */
 public interface HardnessEvaluator {
 	
+	/**
+	 * 
+	 * For the result of different evaluator to be easily comparable the results 
+	 * should range between 1 (for absotly trivial) and 100 for very hard.
+	 * 
+	 * @param paragraph
+	 * @return 
+	 */
 	public int getComprehensionCosts(Paragraph paragraph);
 	
 }

@@ -18,7 +18,9 @@ public class SentenceLengthHardness implements HardnessEvaluator{
 				longestSentenceLength = sentence.length();
 			}
 		}
-		return longestSentenceLength;
+		//lets define 4000 character senetences to be very hard
+		int costs = longestSentenceLength / 40;
+		return costs > 100? 100 : costs;
 	}
 	
 }
