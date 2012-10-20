@@ -2,6 +2,7 @@ package ch.unibe.scs.into;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,12 @@ public class TextCollection {
 	public TextCollection(File dir) throws IOException {
 		for (File f : dir.listFiles()) {
 			TextFile textFile = new TextFile(f);
+			files.add(textFile);
 		}
+	}
+	
+	public Set<TextFile> getFiles() {
+		return Collections.unmodifiableSet(files);
 	}
 
 }

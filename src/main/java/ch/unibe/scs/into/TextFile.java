@@ -6,18 +6,27 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TextFile {
 
+	final private Set<Paragraph> paragraphs = new HashSet<Paragraph>();
+	final private String name;
+	
 	public TextFile(File f) throws IOException {
-		Reader reader = new FileReader(f);
+		final Reader reader = new FileReader(f);
 		for (String paragraph = getNextParagraph(reader); 
 				paragraph != null; paragraph = getNextParagraph(reader)) {
-			System.out.println("Paragraph:\n\n"+paragraph+"\n----\n\n");
+			paragraphs.add(new Paragraph(paragraph));
 		}
-
+		name = f.getName();
 	}
 
+	public Set<Paragraph> getParagraphs() {
+		return Collections.unmodifiableSet(paragraphs);
+	}
 	/**
 	 * 
 	 * @param reader
@@ -25,7 +34,7 @@ public class TextFile {
 	 * @throws IOException 
 	 */
 	private String getNextParagraph(Reader reader) throws IOException {
-		StringWriter resultWriter = new StringWriter();
+		final StringWriter resultWriter = new StringWriter();
 		int lastCharNewLine = 0;
 		for (int ch = reader.read(); ch != -1; ch = reader.read()) {
 			if ((ch == '\n') || (ch == '\r') ) {
@@ -51,6 +60,10 @@ public class TextFile {
 		
 		
  
+	}
+
+	String getName() {
+		return name;
 	}
 
 }
