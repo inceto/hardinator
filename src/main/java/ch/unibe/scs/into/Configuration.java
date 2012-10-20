@@ -4,6 +4,7 @@
  */
 package ch.unibe.scs.into;
 
+import ch.unibe.scs.into.evaluators.SentenceLengthHardness;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import java.util.Set;
 public class Configuration {
 	public static Set<HardnessEvaluator> getHardnessEvaluators() {
 		Set<HardnessEvaluator> result = new HashSet<HardnessEvaluator>();
+		result.add(new SentenceLengthHardness());
 		return result;
 	}
 }
