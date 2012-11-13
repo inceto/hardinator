@@ -5,6 +5,9 @@
 package ch.unibe.scs.into;
 
 import ch.unibe.scs.into.evaluators.SentenceLengthHardness;
+import ch.unibe.scs.into.evaluators.WordFrequencyHardness;
+
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,9 +18,17 @@ import java.util.Set;
  * In real life some inversion of control framework would be used
  */
 public class Configuration {
-	public static Set<HardnessEvaluator> getHardnessEvaluators() {
-		Set<HardnessEvaluator> result = new HashSet<HardnessEvaluator>();
-		result.add(new SentenceLengthHardness());
-		return result;
+	private static Set<HardnessEvaluator> evaluators = new HashSet<HardnessEvaluator>();
+	static {
+		evaluators.add(new SentenceLengthHardness());
+		try {
+			evaluators.add(new WordFrequencyHardness());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Set<HardnessEvaluator> getHardnessEvaluators(){
+		return evaluators;
 	}
 }
