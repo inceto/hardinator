@@ -10,7 +10,7 @@ package ch.unibe.scs.into;
 public class Paragraph implements Comparable<Paragraph> {
 	private final String text;
 
-	Paragraph(String text) {
+	public Paragraph(String text) {
 		this.text = text;
 	}
 	

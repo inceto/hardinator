@@ -20,9 +20,9 @@ public class Main {
 		}
 		System.out.println();
 		System.out.println("PAragraphs by easyness:");
-		for (Paragraph paragraph : sortedParagraphs) {
+		/*for (Paragraph paragraph : sortedParagraphs) {
 			System.out.println("Paragraph:\n\n"+paragraph.getText()+"\n----\n\n");
-		}
+		}*/
 		
 	}
 
