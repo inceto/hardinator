@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import ch.unibe.scs.into.evaluators.LogarithmicUnknownIsBadWordFrequencyHardness;
+import ch.unibe.scs.into.evaluators.LogarithmicWordFrequencyHardness;
+import ch.unibe.scs.into.evaluators.SentenceLengthHardness;
 import ch.unibe.scs.into.evaluators.WordFrequencyHardness;
 
 /**
@@ -19,9 +22,11 @@ import ch.unibe.scs.into.evaluators.WordFrequencyHardness;
 public class Configuration {
 	private static Set<HardnessEvaluator> evaluators = new HashSet<HardnessEvaluator>();
 	static {
-		//evaluators.add(new SentenceLengthHardness());
+		evaluators.add(new SentenceLengthHardness());
 		try {
 			evaluators.add(new WordFrequencyHardness());
+			evaluators.add(new LogarithmicWordFrequencyHardness());
+			evaluators.add(new LogarithmicUnknownIsBadWordFrequencyHardness());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
