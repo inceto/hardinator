@@ -11,6 +11,7 @@ import java.util.Set;
 import ch.unibe.scs.into.evaluators.LogarithmicUnknownIsBadWordFrequencyHardness;
 import ch.unibe.scs.into.evaluators.LogarithmicWordFrequencyHardness;
 import ch.unibe.scs.into.evaluators.SentenceLengthHardness;
+import ch.unibe.scs.into.evaluators.UnknownIsBadHardness;
 import ch.unibe.scs.into.evaluators.WordFrequencyHardness;
 
 /**
@@ -22,10 +23,11 @@ import ch.unibe.scs.into.evaluators.WordFrequencyHardness;
 public class Configuration {
 	private static Set<HardnessEvaluator> evaluators = new HashSet<HardnessEvaluator>();
 	static {
-		evaluators.add(new SentenceLengthHardness());
-                evaluators.add(new WordFrequencyHardness());
-                evaluators.add(new LogarithmicWordFrequencyHardness());
-                evaluators.add(new LogarithmicUnknownIsBadWordFrequencyHardness());
+		//evaluators.add(new SentenceLengthHardness());
+            evaluators.add(new UnknownIsBadHardness());
+                //evaluators.add(new WordFrequencyHardness());
+                //evaluators.add(new LogarithmicWordFrequencyHardness());
+                //evaluators.add(new LogarithmicUnknownIsBadWordFrequencyHardness());
 	}
 
 	public static Set<HardnessEvaluator> getHardnessEvaluators(){
