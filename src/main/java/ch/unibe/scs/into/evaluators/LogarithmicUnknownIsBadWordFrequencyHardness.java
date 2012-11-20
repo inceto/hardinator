@@ -23,7 +23,7 @@ public class LogarithmicUnknownIsBadWordFrequencyHardness implements HardnessEva
 
 	public LogarithmicUnknownIsBadWordFrequencyHardness() throws IOException {
 		Reader reader = new InputStreamReader(
-				WordFrequencyHardnessTest.class
+				WordFrequencyHardness.class
 						.getResourceAsStream("wordfrequency.txt"));
 		BufferedReader in = new BufferedReader(reader);
 		String line = in.readLine();

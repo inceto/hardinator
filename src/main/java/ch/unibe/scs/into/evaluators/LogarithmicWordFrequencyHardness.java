@@ -23,7 +23,7 @@ public class LogarithmicWordFrequencyHardness implements HardnessEvaluator {
 
 	public LogarithmicWordFrequencyHardness() throws IOException {
 		Reader reader = new InputStreamReader(
-				WordFrequencyHardnessTest.class
+				WordFrequencyHardness.class
 						.getResourceAsStream("wordfrequency.txt"));
 		BufferedReader in = new BufferedReader(reader);
 		String line = in.readLine();
