@@ -23,13 +23,9 @@ public class Configuration {
 	private static Set<HardnessEvaluator> evaluators = new HashSet<HardnessEvaluator>();
 	static {
 		evaluators.add(new SentenceLengthHardness());
-		try {
-			evaluators.add(new WordFrequencyHardness());
-			evaluators.add(new LogarithmicWordFrequencyHardness());
-			evaluators.add(new LogarithmicUnknownIsBadWordFrequencyHardness());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+                evaluators.add(new WordFrequencyHardness());
+                evaluators.add(new LogarithmicWordFrequencyHardness());
+                evaluators.add(new LogarithmicUnknownIsBadWordFrequencyHardness());
 	}
 
 	public static Set<HardnessEvaluator> getHardnessEvaluators(){

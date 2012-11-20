@@ -4,44 +4,14 @@
  */
 package ch.unibe.scs.into.evaluators;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.lang.Math.*;
 
 import ch.unibe.scs.into.HardnessEvaluator;
 import ch.unibe.scs.into.Paragraph;
 
 public class WordFrequencyHardness implements HardnessEvaluator {
 
-	Map<String, Integer> frequencyMap = new HashMap<String, Integer>();
-	private int maxFrequency = 0;
-
-	public WordFrequencyHardness() throws IOException {
-		Reader reader = new InputStreamReader(
-				WordFrequencyHardness.class
-						.getResourceAsStream("wordfrequency.txt"));
-		BufferedReader in = new BufferedReader(reader);
-		String line = in.readLine();
-		while (line != null) {
-			String[] parts = line.split(" ");
-			int frequency = Integer.parseInt(parts[0]);
-			String word = parts[1].toLowerCase();
-			//we use the first in the list
-			if (!frequencyMap.containsKey(word)) {
-				if (frequency > maxFrequency) {
-					maxFrequency = frequency;
-				}
-				frequencyMap.put(word, frequency);
-			}
-			line = in.readLine();
-		}
-		in.close();
-	}
+	private FrequencyMap frequencyMap = WordFrequencyMap.getInstance();
+	private int maxFrequency = frequencyMap.getMaxFrequency();	
 
 	public int getComprehensionCosts(Paragraph paragraph) {
 		String[] allWords = removeNonChracter(paragraph.getText().toLowerCase()).split(" ");
