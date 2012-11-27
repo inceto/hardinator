@@ -4,22 +4,14 @@
  */
 package ch.unibe.scs.into.evaluators;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.HashMap;
-import java.util.Map;
 
-import static java.lang.Math.*;
-
-import ch.unibe.scs.into.HardnessEvaluator;
+import ch.unibe.scs.into.ComprehensibilityEvaluator;
 import ch.unibe.scs.into.Paragraph;
 
-public class LogarithmicUnknownIsBadWordFrequencyHardness implements HardnessEvaluator {
+public class WordFrequencyEvaluator implements ComprehensibilityEvaluator {
 
-	private FrequencyMap frequencyMap = new LogarythmicWordFrequencyMap(WordFrequencyMap.getInstance());
-	private int maxFrequency = frequencyMap.getMaxFrequency();
+	private FrequencyMap frequencyMap = WordFrequencyMap.getInstance();
+	private int maxFrequency = frequencyMap.getMaxFrequency();	
 
 	public int getComprehensionCosts(Paragraph paragraph) {
 		String[] allWords = removeNonChracter(paragraph.getText().toLowerCase()).split(" ");
@@ -28,14 +20,14 @@ public class LogarithmicUnknownIsBadWordFrequencyHardness implements HardnessEva
 		for (int i = 0; i < allWords.length; i++) {
 			String word = allWords[i];
 			if (word.length() > 0) {
-				foundWordCount++;
 				if (frequencyMap.containsKey(word)) {
+					foundWordCount++;
 					totalFrequencySum += frequencyMap.get(word);
-				}
+				}				
 			}
 		}
 		int average = foundWordCount > 0 ? (int) (totalFrequencySum / foundWordCount) : maxFrequency;
-		average = (int) (average*99/maxFrequency);
+		average = (int) (Math.log10(average)*99/Math.log10(maxFrequency));
 		int result = 100 - average;
 		return result;
 		

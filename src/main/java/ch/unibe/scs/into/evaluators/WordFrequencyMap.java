@@ -23,7 +23,7 @@ public class WordFrequencyMap extends HashMap<String, Integer> implements Freque
     
     private WordFrequencyMap() throws IOException {
         Reader reader = new InputStreamReader(
-				WordFrequencyHardness.class
+				WordFrequencyEvaluator.class
 						.getResourceAsStream("wordfrequency.txt"));
 		BufferedReader in = new BufferedReader(reader);
 		String line = in.readLine();

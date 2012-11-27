@@ -4,11 +4,11 @@
  */
 package ch.unibe.scs.into.evaluators;
 
-import ch.unibe.scs.into.HardnessEvaluator;
+import ch.unibe.scs.into.ComprehensibilityEvaluator;
 import ch.unibe.scs.into.Paragraph;
 
 
-public class UnknownIsBadHardness implements HardnessEvaluator{
+public class UnknownIsBadEvaluator implements ComprehensibilityEvaluator{
 
 	public int getComprehensionCosts(Paragraph paragraph) {
 		return paragraph.getText().toLowerCase().contains("unknown") ? 100 : 1;

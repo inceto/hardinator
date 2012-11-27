@@ -4,14 +4,14 @@
  */
 package ch.unibe.scs.into;
 
+import ch.unibe.scs.into.evaluators.LogarithmicUnknownIsBadWordFrequencyEvaluator;
 import java.util.HashSet;
 import java.util.Set;
 
-import ch.unibe.scs.into.evaluators.LogarithmicUnknownIsBadWordFrequencyHardness;
-import ch.unibe.scs.into.evaluators.LogarithmicWordFrequencyHardness;
-import ch.unibe.scs.into.evaluators.SentenceLengthHardness;
-import ch.unibe.scs.into.evaluators.UnknownIsBadHardness;
-import ch.unibe.scs.into.evaluators.WordFrequencyHardness;
+import ch.unibe.scs.into.evaluators.LogarithmicWordFrequencyEvaluator;
+import ch.unibe.scs.into.evaluators.SentenceLengthEvaluator;
+import ch.unibe.scs.into.evaluators.UnknownIsBadEvaluator;
+import ch.unibe.scs.into.evaluators.WordFrequencyEvaluator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,39 +24,39 @@ import java.util.Map.Entry;
  */
 public class Configuration {
 
-    private static Set<HardnessEvaluator> evaluators = new HashSet<HardnessEvaluator>();
+    private static Set<ComprehensibilityEvaluator> evaluators = new HashSet<ComprehensibilityEvaluator>();
 
     static {
-        Map<HardnessEvaluator, Integer> evaluatorWeightMap = new HashMap<HardnessEvaluator, Integer>();
-        evaluatorWeightMap.put(new SentenceLengthHardness(),400);
-        evaluatorWeightMap.put(new UnknownIsBadHardness(),50);
-        evaluatorWeightMap.put(new WordFrequencyHardness(),20);
-        evaluatorWeightMap.put(new LogarithmicWordFrequencyHardness(), 100);
-        evaluatorWeightMap.put(new LogarithmicUnknownIsBadWordFrequencyHardness(), 900);
+        Map<ComprehensibilityEvaluator, Integer> evaluatorWeightMap = new HashMap<ComprehensibilityEvaluator, Integer>();
+        evaluatorWeightMap.put(new SentenceLengthEvaluator(),400);
+        evaluatorWeightMap.put(new UnknownIsBadEvaluator(),50);
+        evaluatorWeightMap.put(new WordFrequencyEvaluator(),20);
+        evaluatorWeightMap.put(new LogarithmicWordFrequencyEvaluator(), 100);
+        evaluatorWeightMap.put(new LogarithmicUnknownIsBadWordFrequencyEvaluator(), 900);
         evaluators = getCalibratedEvaluators(evaluatorWeightMap);
     }
 
-    public static Set<HardnessEvaluator> getHardnessEvaluators() {
+    public static Set<ComprehensibilityEvaluator> getHardnessEvaluators() {
         return evaluators;
     }
 
-    private static Set<HardnessEvaluator> getCalibratedEvaluators(Map<HardnessEvaluator, Integer> evaluatorWeightMap) {
+    private static Set<ComprehensibilityEvaluator> getCalibratedEvaluators(Map<ComprehensibilityEvaluator, Integer> evaluatorWeightMap) {
         long totalWeight = 0;
-        for (Entry<HardnessEvaluator, Integer> entry : evaluatorWeightMap.entrySet()) {
+        for (Entry<ComprehensibilityEvaluator, Integer> entry : evaluatorWeightMap.entrySet()) {
             totalWeight += entry.getValue();
         }
-        Set<HardnessEvaluator> result = new HashSet<HardnessEvaluator>();
-        for (Entry<HardnessEvaluator, Integer> entry : evaluatorWeightMap.entrySet()) {
+        Set<ComprehensibilityEvaluator> result = new HashSet<ComprehensibilityEvaluator>();
+        for (Entry<ComprehensibilityEvaluator, Integer> entry : evaluatorWeightMap.entrySet()) {
             result.add(new CalibratedEvaluator(entry.getKey(), ((double)entry.getValue()) / totalWeight));
         }
         return result;
     }
 
-    private static class CalibratedEvaluator implements HardnessEvaluator {
-        private final HardnessEvaluator wrapped;
+    private static class CalibratedEvaluator implements ComprehensibilityEvaluator {
+        private final ComprehensibilityEvaluator wrapped;
         private final double factor;
 
-        public CalibratedEvaluator(HardnessEvaluator wrapped, double factor) {
+        public CalibratedEvaluator(ComprehensibilityEvaluator wrapped, double factor) {
             this.wrapped = wrapped;
             this.factor = factor;
         }

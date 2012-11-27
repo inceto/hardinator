@@ -13,10 +13,10 @@ import java.util.Map;
 
 import static java.lang.Math.*;
 
-import ch.unibe.scs.into.HardnessEvaluator;
+import ch.unibe.scs.into.ComprehensibilityEvaluator;
 import ch.unibe.scs.into.Paragraph;
 
-public class LogarithmicWordFrequencyHardness implements HardnessEvaluator {
+public class LogarithmicUnknownIsBadWordFrequencyEvaluator implements ComprehensibilityEvaluator {
 
 	private FrequencyMap frequencyMap = new LogarythmicWordFrequencyMap(WordFrequencyMap.getInstance());
 	private int maxFrequency = frequencyMap.getMaxFrequency();
@@ -28,10 +28,10 @@ public class LogarithmicWordFrequencyHardness implements HardnessEvaluator {
 		for (int i = 0; i < allWords.length; i++) {
 			String word = allWords[i];
 			if (word.length() > 0) {
+				foundWordCount++;
 				if (frequencyMap.containsKey(word)) {
-					foundWordCount++;
 					totalFrequencySum += frequencyMap.get(word);
-				}				
+				}
 			}
 		}
 		int average = foundWordCount > 0 ? (int) (totalFrequencySum / foundWordCount) : maxFrequency;

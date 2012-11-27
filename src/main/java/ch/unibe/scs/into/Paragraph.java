@@ -28,7 +28,7 @@ public class Paragraph implements Comparable<Paragraph> {
     
     private void computeCosts() {
 		int totalCosts = 0;
-		for (HardnessEvaluator he :Configuration.getHardnessEvaluators()) {
+		for (ComprehensibilityEvaluator he :Configuration.getHardnessEvaluators()) {
 			totalCosts += he.getComprehensionCosts(this);
 		}
 		costs = totalCosts;

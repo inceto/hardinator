@@ -9,7 +9,7 @@ package ch.unibe.scs.into;
  * They indicate the hardness of a paragraph in term of comprehension costs,
  * the higher this value is the harder the text is assumed to be
  */
-public interface HardnessEvaluator {
+public interface ComprehensibilityEvaluator {
 	
 	/**
 	 * 
