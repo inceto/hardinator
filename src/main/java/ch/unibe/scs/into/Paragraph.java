@@ -9,6 +9,7 @@ package ch.unibe.scs.into;
  */
 public class Paragraph implements Comparable<Paragraph> {
 	private final String text;
+    private int costs = -1;
 
 	public Paragraph(String text) {
 		this.text = text;
@@ -19,11 +20,18 @@ public class Paragraph implements Comparable<Paragraph> {
 	}
 	
 	public int getComprehensionCosts() {
+		if (costs == -1) {
+            computeCosts();
+        }
+        return costs;
+	}
+    
+    private void computeCosts() {
 		int totalCosts = 0;
 		for (HardnessEvaluator he :Configuration.getHardnessEvaluators()) {
 			totalCosts += he.getComprehensionCosts(this);
 		}
-		return totalCosts;
+		costs = totalCosts;
 	}
 
 	public int compareTo(Paragraph other) {

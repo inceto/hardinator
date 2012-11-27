@@ -15,11 +15,13 @@ public class Main {
 			//System.out.println("Name of the file: "+tf.getName());
 			for (Paragraph paragraph : tf.getParagraphs()) {
 				//System.out.println("Paragraph:\n\n"+paragraph.getText()+"\n----\n\n");
-				sortedParagraphs.add(paragraph);
+                if (paragraph.getText().length() > 100) {
+                    sortedParagraphs.add(paragraph);
+                }
 			}
 		}
 		System.out.println();
-		System.out.println("PAragraphs by easyness:");
+		System.out.println("Paragraphs by easyness:");
 		for (Paragraph paragraph : sortedParagraphs) {
 			System.out.println("Paragraph:\n\n"+paragraph.getText()+"\n"+paragraph.getComprehensionCosts()+"\n----\n\n");
 		}
