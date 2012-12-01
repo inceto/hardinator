@@ -8,10 +8,10 @@ import ch.unibe.scs.into.ComprehensibilityEvaluator;
 import ch.unibe.scs.into.Paragraph;
 
 
-public class UnknownIsBadEvaluator implements ComprehensibilityEvaluator{
+public class MircaeHeuristicsEvaluator implements ComprehensibilityEvaluator{
 
 	public int getComprehensionCosts(Paragraph paragraph) {
-		return paragraph.getText().toLowerCase().contains("unknown") ? 100 : 1;
+		return paragraph.getText().toLowerCase().contains("portentous") ? 100 : 1;
 	}
 	
 }

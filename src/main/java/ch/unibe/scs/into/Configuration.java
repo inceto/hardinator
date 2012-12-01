@@ -10,7 +10,7 @@ import java.util.Set;
 
 import ch.unibe.scs.into.evaluators.LogarithmicWordFrequencyEvaluator;
 import ch.unibe.scs.into.evaluators.SentenceLengthEvaluator;
-import ch.unibe.scs.into.evaluators.UnknownIsBadEvaluator;
+import ch.unibe.scs.into.evaluators.MircaeHeuristicsEvaluator;
 import ch.unibe.scs.into.evaluators.WordFrequencyEvaluator;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class Configuration {
     static {
         Map<ComprehensibilityEvaluator, Integer> evaluatorWeightMap = new HashMap<ComprehensibilityEvaluator, Integer>();
         evaluatorWeightMap.put(new SentenceLengthEvaluator(),400);
-        evaluatorWeightMap.put(new UnknownIsBadEvaluator(),50);
+        evaluatorWeightMap.put(new MircaeHeuristicsEvaluator(),50);
         evaluatorWeightMap.put(new WordFrequencyEvaluator(),20);
         evaluatorWeightMap.put(new LogarithmicWordFrequencyEvaluator(), 100);
         evaluatorWeightMap.put(new LogarithmicUnknownIsBadWordFrequencyEvaluator(), 900);
